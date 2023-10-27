@@ -14,6 +14,7 @@ class Hand
             maxCards = 11;
             hand = new Card[maxCards];
             currCards = 0;
+            winStatus = -1;
             stand = false;
             sum = 0;
         }
@@ -37,7 +38,6 @@ class Hand
                     do {
                         cout << "Drew an Ace: Do you want it to be a 1 or an 11? "; 
                         cin >> userChoice;
-                        cout << userChoice << endl;
 
                         if (userChoice == 1 || userChoice == 11) {valid = true;}
                         else {valid = false;}
@@ -84,9 +84,22 @@ class Hand
             stand = false;
             sum = 0;
         }
+        void reportStatus() 
+        {
+            /**
+             * Win Status
+             * 0 - Blackjack
+             * 1 - Bus (Bust)
+             * -1 - Continue
+            */
+            if (sum == 21) (winStatus = 0);
+            else if (sum > 21) (winStatus = 1);
+            else (winStatus = -1);
+        }
         int getSum() {return sum;} const
         int getCurrCards() {return currCards;} const
         int getMaxCards() {return maxCards;} const
+        int getWinStatus() {return winStatus;} const
         bool getStand() {return stand;} const
         void setStand(bool stand) {this->stand = stand;}
         bool operator <(const Hand &hand) const {return sum < hand.sum;}
@@ -107,7 +120,7 @@ class Hand
             {
                 os << hand.hand[i] << endl;
             }
-            os << "Sum of Hand: " << hand.sum;
+            os << "HAND SUM:        " << hand.sum;
             return os;
         }
     private:
@@ -120,6 +133,12 @@ class Hand
         int playerID;
         int currCards;
         int maxCards;
+        /**
+         * -1 - Still Playing
+         * 0 - Blackjack
+         * 1 - Bust
+        */
+        int winStatus;
         int sum;
 
 };
