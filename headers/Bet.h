@@ -96,11 +96,8 @@ class Bet
                 if (matchAmount >= this->money) { brokeBet(bet); }
                 else 
                 {
-                    cout << "\t INSIDE ELSE STATEMENT" << endl;
                     this->bet += matchAmount;
                     this->money -= matchAmount;
-                    cout << "\tBET: " << bet << endl;
-                    cout << "\tMONEY: " << money << endl;
                 }
             }
         }
